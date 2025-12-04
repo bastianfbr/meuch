@@ -7,6 +7,7 @@ import { MetricsDashboard } from "./components/game/MetricsDashboard";
 import { ScenarioCard } from "./components/game/ScenarioCard";
 import { ImpactCard } from "./components/game/ImpactCard";
 import { GameOverCard } from "./components/game/GameOverCard";
+import { Planet } from "./components/three/Planet";
 import {
   INITIAL_METRICS,
   MIN_SCORE,
@@ -166,7 +167,8 @@ const App: React.FC = () => {
       setGameState(statusCheck.status);
       setLastSelection((prev) => ({
         ...prev!,
-        endTitle: statusCheck.type === "master" ? "Mission Terminée" : "Fin de partie",
+        endTitle:
+          statusCheck.type === "master" ? "Mission Terminée" : "Fin de partie",
         endMsg: statusCheck.message,
       }));
     } else {
@@ -198,6 +200,10 @@ const App: React.FC = () => {
       <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
         <GameHeader onInfoClick={() => setShowInfo(true)} />
         <MetricsDashboard metrics={metrics} />
+
+        <div className="mb-8">
+          <Planet treeDensity={0.1} houseDensity={0.5} buildingDensity={0.1} />
+        </div>
 
         <div className="relative min-h-[400px]">
           {gameState === "playing" ? (
