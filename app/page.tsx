@@ -160,8 +160,19 @@ const App: React.FC = () => {
     setRandomEvent(null);
     setLastImpact(null);
     setLastSelection(null);
-    setCurrentStep((p) => p + 1);
-    setGameState("playing");
+
+    if (currentStep + 1 >= SCENARIOS.length) {
+      const statusCheck = checkGameStatus(metrics, SCENARIOS.length);
+      setGameState(statusCheck.status);
+      setLastSelection((prev) => ({
+        ...prev!,
+        endTitle: statusCheck.type === "master" ? "Mission Terminée" : "Fin de partie",
+        endMsg: statusCheck.message,
+      }));
+    } else {
+      setCurrentStep((p) => p + 1);
+      setGameState("playing");
+    }
   };
 
   const resetGame = (): void => {
