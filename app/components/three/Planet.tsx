@@ -42,8 +42,10 @@ export const Planet: React.FC<PlanetProps> = ({
     camera.position.set(0, 0, 85);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    renderer.shadowMap.enabled = false;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
     currentMount.appendChild(renderer.domElement);
@@ -57,22 +59,37 @@ export const Planet: React.FC<PlanetProps> = ({
     controls.minDistance = 40;
     controls.maxDistance = 150;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
     dirLight.position.set(50, 50, 50);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 0.5;
+    dirLight.shadow.camera.far = 200;
+    dirLight.shadow.camera.left = -50;
+    dirLight.shadow.camera.right = 50;
+    dirLight.shadow.camera.top = 50;
+    dirLight.shadow.camera.bottom = -50;
+    dirLight.shadow.bias = -0.0001;
     scene.add(dirLight);
 
-    const geometryPlanet = new THREE.IcosahedronGeometry(PLANET_RADIUS, 4);
+    const hemisphereLight = new THREE.HemisphereLight(0x87ceeb, 0x1e293b, 0.6);
+    scene.add(hemisphereLight);
+
+    const geometryPlanet = new THREE.IcosahedronGeometry(PLANET_RADIUS, 6);
 
     const materialPlanet = new THREE.MeshStandardMaterial({
       color: 0x1e293b,
       roughness: 0.7,
+      metalness: 0.1,
       flatShading: true,
     });
 
     const planet = new THREE.Mesh(geometryPlanet, materialPlanet);
+    planet.receiveShadow = true;
     scene.add(planet);
 
     const planetWireframe = new THREE.LineSegments(
@@ -88,23 +105,31 @@ export const Planet: React.FC<PlanetProps> = ({
     const createModernTree = () => {
       const group = new THREE.Group();
       const trunk = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.2, 0.4, 1.2, 5),
-        new THREE.MeshStandardMaterial({ color: 0x475569 })
+        new THREE.CylinderGeometry(0.2, 0.4, 1.2, 8),
+        new THREE.MeshStandardMaterial({
+          color: 0x475569,
+          roughness: 0.9,
+        })
       );
       trunk.position.y = 0.6;
+      trunk.castShadow = true;
+      trunk.receiveShadow = true;
       group.add(trunk);
 
       const leaves = new THREE.Mesh(
-        new THREE.ConeGeometry(1.2, 3, 5),
+        new THREE.ConeGeometry(1.2, 3, 8),
         new THREE.MeshStandardMaterial({
           color: 0x4ade80,
           flatShading: true,
           emissive: 0x4ade80,
           emissiveIntensity: 0.2,
+          roughness: 0.7,
         })
       );
       leaves.position.y = 2.1;
       leaves.rotateY(Math.random() * Math.PI);
+      leaves.castShadow = true;
+      leaves.receiveShadow = true;
       group.add(leaves);
       return group;
     };
@@ -113,23 +138,32 @@ export const Planet: React.FC<PlanetProps> = ({
       const group = new THREE.Group();
       const base = new THREE.Mesh(
         new THREE.BoxGeometry(1.8, 1.5, 1.8),
-        new THREE.MeshStandardMaterial({ color: 0xffffff })
+        new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          roughness: 0.6,
+          metalness: 0.1,
+        })
       );
       base.position.y = 0.75;
+      base.castShadow = true;
+      base.receiveShadow = true;
       group.add(base);
 
       const roofColor = Math.random() > 0.5 ? 0xfb923c : 0xea580c;
       const roof = new THREE.Mesh(
-        new THREE.ConeGeometry(1.6, 1.2, 4),
+        new THREE.ConeGeometry(1.6, 1.2, 6),
         new THREE.MeshStandardMaterial({
           color: roofColor,
           flatShading: true,
           emissive: roofColor,
           emissiveIntensity: 0.2,
+          roughness: 0.8,
         })
       );
       roof.position.y = 2.1;
       roof.rotation.y = Math.PI / 4;
+      roof.castShadow = true;
+      roof.receiveShadow = true;
       group.add(roof);
       return group;
     };
@@ -144,9 +178,13 @@ export const Planet: React.FC<PlanetProps> = ({
           flatShading: true,
           emissive: 0x60a5fa,
           emissiveIntensity: 0.1,
+          roughness: 0.4,
+          metalness: 0.5,
         })
       );
       building.position.y = height / 2;
+      building.castShadow = true;
+      building.receiveShadow = true;
       group.add(building);
 
       const roofLight = new THREE.Mesh(
@@ -163,8 +201,9 @@ export const Planet: React.FC<PlanetProps> = ({
       const mat = new THREE.MeshStandardMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.85,
         flatShading: true,
+        roughness: 1.0,
       });
 
       const puffs = 3 + Math.floor(Math.random() * 5);
