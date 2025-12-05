@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Village Résistant - Opération N.I.R.D.",
+  title: "MEUCH - Opération N.I.R.D.",
   description:
     "Un jeu de stratégie pour un numérique inclusif, responsable et durable.",
   icons: {

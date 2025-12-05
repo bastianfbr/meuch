@@ -17,15 +17,28 @@ const LegendItem: React.FC<LegendItemProps> = ({
   label,
   percentage,
   color,
-}) => (
-  <div className="flex items-center gap-1.5">
-    <Icon size={14} style={{ color }} />
-    <span className="text-xs text-slate-300">{label}</span>
-    <span className="text-xs font-bold" style={{ color }}>
-      {percentage}%
-    </span>
-  </div>
-);
+}) => {
+  const isLow = percentage < 15;
+
+  return (
+    <div className={`flex items-center gap-1.5 rounded`}>
+      <Icon size={14} style={{ color: isLow ? "#ef4444" : color }} />
+      <span
+        className={`text-xs ${
+          isLow ? "text-red-300 font-semibold" : "text-slate-300"
+        }`}
+      >
+        {label}
+      </span>
+      <span
+        className={`text-xs font-bold ${isLow ? "text-red-400" : ""}`}
+        style={{ color: isLow ? undefined : color }}
+      >
+        {percentage}%
+      </span>
+    </div>
+  );
+};
 
 interface PlanetProps {
   treeDensity?: number;
@@ -39,7 +52,7 @@ export const Planet: React.FC<PlanetProps> = ({
   treeDensity = 0.5,
   houseDensity = 0.3,
   buildingDensity = 0.2,
-  totalItems = 200,
+  totalItems = 150,
   isDragging = false,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
