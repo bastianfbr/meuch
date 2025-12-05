@@ -186,9 +186,9 @@ const App: React.FC = () => {
 
         <div className="mb-8">
           <Planet
-            treeDensity={0.33}
-            houseDensity={0.33}
-            buildingDensity={0.33}
+            treeDensity={metrics.Environnement / 100}
+            houseDensity={metrics.Société / 100}
+            buildingDensity={metrics.Economie / 100}
           />
         </div>
 

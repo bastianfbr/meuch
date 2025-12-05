@@ -1,5 +1,5 @@
 import React from "react";
-import { Users, Leaf, ShieldCheck } from "lucide-react";
+import { Home, TreePine, Building2 } from "lucide-react";
 import { MetricCard } from "../ui/MetricCard";
 import type { Metrics } from "../../types/game";
 
@@ -14,20 +14,20 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
     <MetricCard
       label="Société"
       value={metrics.Société}
-      icon={Users}
-      color="blue"
+      icon={Home}
+      color="orange"
     />
     <MetricCard
       label="Environnement"
       value={metrics.Environnement}
-      icon={Leaf}
+      icon={TreePine}
       color="green"
     />
     <MetricCard
       label="Economie"
       value={metrics.Economie}
-      icon={ShieldCheck}
-      color="orange"
+      icon={Building2}
+      color="blue"
     />
   </div>
 );

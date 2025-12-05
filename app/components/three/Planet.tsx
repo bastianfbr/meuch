@@ -3,11 +3,29 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { TreePine, Home, Building2 } from "lucide-react";
 
 interface LegendItemProps {
-  color: string;
+  icon: React.ElementType;
   label: string;
+  percentage: number;
+  color: string;
 }
+
+const LegendItem: React.FC<LegendItemProps> = ({
+  icon: Icon,
+  label,
+  percentage,
+  color,
+}) => (
+  <div className="flex items-center gap-1.5">
+    <Icon size={14} style={{ color }} />
+    <span className="text-xs text-slate-300">{label}</span>
+    <span className="text-xs font-bold" style={{ color }}>
+      {percentage}%
+    </span>
+  </div>
+);
 
 interface PlanetProps {
   treeDensity?: number;
@@ -327,6 +345,29 @@ export const Planet: React.FC<PlanetProps> = ({
   return (
     <div className="relative w-full h-[600px] bg-[#0f172a] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
       <div ref={mountRef} className="w-full h-full" />
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
+        <div className="flex items-center gap-6">
+          <LegendItem
+            icon={TreePine}
+            label="Environnement"
+            percentage={Math.round(treeDensity * 100)}
+            color="#4ade80"
+          />
+          <LegendItem
+            icon={Home}
+            label="Société"
+            percentage={Math.round(houseDensity * 100)}
+            color="#fb923c"
+          />
+          <LegendItem
+            icon={Building2}
+            label="Économie"
+            percentage={Math.round(buildingDensity * 100)}
+            color="#60a5fa"
+          />
+        </div>
+      </div>
     </div>
   );
 };
