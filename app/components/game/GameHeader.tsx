@@ -15,12 +15,12 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
   };
 
   return (
-    <header className="flex justify-between items-center mb-8">
+    <header className="flex justify-between items-center mb-8 flex-col sm:flex-row gap-6">
       <div className="flex items-center gap-3">
         <div className="hidden sm:flex w-12 h-12 rounded-xl items-center justify-center invert saturate-0">
           <img src="/meuch.svg" alt="Meuch" className="w-full h-full" />
         </div>
-        <div>
+        <div className="text-center sm:text-left">
           <h1 className="text-2xl font-black text-white tracking-wide uppercase">
             Opération{" "}
             <span className="text-transparent uppercase bg-clip-text bg-linear-to-r from-orange-400 to-red-500">
@@ -37,17 +37,18 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
           title="📋 Mentions Légales"
           content={
             <p>
-              L'ensemble des ressources présentes sur cette application ont été
-              créées à 100% par nos soins.
+              Cliquez sur le bouton pour voir les informations juridiques et
+              mentions légales de cette application.
             </p>
           }
         >
-          <button
-            className="p-2 bg-slate-500/10 hover:bg-slate-500/20 rounded-full transition border border-slate-500/30 text-slate-400 hover:text-slate-300 cursor-pointer"
+          <Link
+            href="/mentions-legales"
+            className="p-2 bg-slate-500/10 hover:bg-slate-500/20 rounded-full transition border border-slate-500/30 text-slate-400 hover:text-slate-300 cursor-pointer flex"
             aria-label="Mentions légales"
           >
             <Scale size={20} />
-          </button>
+          </Link>
         </Tooltip>
 
         <Tooltip
@@ -58,14 +59,7 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
                 Numérique Inclusif, Responsable et Durable : une approche pour
                 libérer l&apos;école de la dépendance aux Big Tech.
               </p>
-              <a
-                href="https://nird.forge.apps.education.fr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-300 font-medium hover:text-blue-200 underline transition cursor-pointer"
-              >
-                👉 Cliquez ici pour en savoir plus
-              </a>
+              <p>Cliquez sur le bouton pour en savoir plus sur NIRD.</p>
             </>
           }
         >
@@ -78,13 +72,23 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
           </button>
         </Tooltip>
 
-        <Link
-          href="/femmes-informatique"
-          className="p-2 bg-pink-500/10 hover:bg-pink-500/20 rounded-full transition border border-pink-500/30 text-pink-400 hover:text-pink-300 cursor-pointer inline-block"
-          aria-label="Femmes en Informatique"
+        <Tooltip
+          title="👩‍💻 Femmes et Informatique"
+          content={
+            <p>
+              Cliquez sur le bouton pour découvrir les pionnières et actrices du
+              numérique.
+            </p>
+          }
         >
-          <Users size={20} />
-        </Link>
+          <Link
+            href="/femmes-informatique"
+            className="p-2 bg-pink-500/10 hover:bg-pink-500/20 rounded-full transition border border-pink-500/30 text-pink-400 hover:text-pink-300 cursor-pointer flex"
+            aria-label="Femmes en Informatique"
+          >
+            <Users size={20} />
+          </Link>
+        </Tooltip>
       </div>
     </header>
   );
