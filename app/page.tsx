@@ -3,7 +3,6 @@
 import React, { useState, useCallback } from "react";
 import { GameHeader } from "./components/game/GameHeader";
 import { GameInfoModal } from "./components/game/GameInfoModal";
-import { MetricsDashboard } from "./components/game/MetricsDashboard";
 import { ScenarioCard } from "./components/game/ScenarioCard";
 import { ImpactCard } from "./components/game/ImpactCard";
 import { GameOverCard } from "./components/game/GameOverCard";
@@ -182,7 +181,6 @@ const App: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         <GameHeader onInfoClick={() => setShowInfo(true)} />
-        <MetricsDashboard metrics={metrics} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div className="order-2 lg:order-1">
