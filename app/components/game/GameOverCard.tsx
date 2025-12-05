@@ -37,23 +37,23 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
       <div className="grid grid-cols-3 gap-4 mb-8 text-center max-w-sm mx-auto">
         <div className="p-3 bg-white/5 rounded-xl">
           <div className="text-2xl font-bold text-blue-400">
-            {metrics.Inclusion}%
+            {metrics.Société}%
           </div>
-          <div className="text-[10px] uppercase text-gray-500">Inclusion</div>
+          <div className="text-[10px] uppercase text-gray-500">Société</div>
         </div>
         <div className="p-3 bg-white/5 rounded-xl">
           <div className="text-2xl font-bold text-green-400">
-            {metrics.Durabilité}%
+            {metrics.Environnement}%
           </div>
-          <div className="text-[10px] uppercase text-gray-500">Durabilité</div>
+          <div className="text-[10px] uppercase text-gray-500">
+            Environnement
+          </div>
         </div>
         <div className="p-3 bg-white/5 rounded-xl">
           <div className="text-2xl font-bold text-orange-400">
-            {metrics.Responsabilité}%
+            {metrics.Economie}%
           </div>
-          <div className="text-[10px] uppercase text-gray-500">
-            Responsabilité
-          </div>
+          <div className="text-[10px] uppercase text-gray-500">Economie</div>
         </div>
       </div>
 

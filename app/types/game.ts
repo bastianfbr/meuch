@@ -1,15 +1,13 @@
 export interface Metrics {
-  Inclusion: number;
-  Durabilité: number;
-  Responsabilité: number;
-  Budget: number;
+  Société: number;
+  Environnement: number;
+  Economie: number;
 }
 
 export interface Impact {
-  Budget?: number;
-  Durabilité?: number;
-  Inclusion?: number;
-  Responsabilité?: number;
+  Environnement?: number;
+  Société?: number;
+  Economie?: number;
 }
 
 export interface Option {

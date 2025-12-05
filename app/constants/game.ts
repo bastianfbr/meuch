@@ -1,14 +1,12 @@
 import type { Metrics, Scenario, RandomEvent } from "../types/game";
 
 export const INITIAL_METRICS: Metrics = {
-  Inclusion: 50,
-  Durabilité: 50,
-  Responsabilité: 50,
-  Budget: 1000,
+  Société: 50,
+  Environnement: 50,
+  Economie: 50,
 };
 
 export const MIN_SCORE = 15;
-export const MIN_BUDGET = -100;
 
 export const SCENARIOS: Scenario[] = [
   {
@@ -19,10 +17,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Obéir à Goliath : On jette tout et on rachète du neuf.",
         impact: {
-          Budget: -800,
-          Durabilité: -40,
-          Inclusion: 0,
-          Responsabilité: -10,
+          Environnement: -40,
+          Société: 0,
+          Economie: -10,
         },
         feedback:
           "Désastre écologique ! Des machines fonctionnelles partent à la benne. Le budget explose.",
@@ -31,10 +28,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "La Résistance Linux : On installe un OS libre et léger.",
         impact: {
-          Budget: -100,
-          Durabilité: 40,
-          Inclusion: 10,
-          Responsabilité: 30,
+          Environnement: 40,
+          Société: 10,
+          Economie: 30,
         },
         feedback:
           "Esprit NIRD ! Tu prolonges la vie du matériel et tu te libères des licences coûteuses.",
@@ -43,10 +39,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Ignorer l'alerte : On garde Windows sans mises à jour.",
         impact: {
-          Budget: 0,
-          Durabilité: 10,
-          Inclusion: 0,
-          Responsabilité: -50,
+          Environnement: 10,
+          Société: 0,
+          Economie: -50,
         },
         feedback:
           "Dangereux ! Tu exposes les données des élèves aux failles de sécurité.",
@@ -62,10 +57,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Accepter l'offre GAFAM (C'est gratuit et facile).",
         impact: {
-          Budget: 50,
-          Durabilité: -5,
-          Inclusion: 10,
-          Responsabilité: -40,
+          Environnement: -5,
+          Société: 10,
+          Economie: -40,
         },
         feedback:
           "Si c'est gratuit, c'est que l'élève est le produit. Tes données partent hors UE.",
@@ -75,10 +69,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Utiliser 'La Forge' des communs numériques.",
         impact: {
-          Budget: -50,
-          Durabilité: 10,
-          Inclusion: 20,
-          Responsabilité: 40,
+          Environnement: 10,
+          Société: 20,
+          Economie: 40,
         },
         feedback:
           "Bravo ! Tu utilises des outils souverains, hébergés en France et open source.",
@@ -88,10 +81,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Monter son propre serveur dans le placard du CDI.",
         impact: {
-          Budget: -150,
-          Durabilité: 5,
-          Inclusion: -10,
-          Responsabilité: 20,
+          Environnement: 5,
+          Société: -10,
+          Economie: 20,
         },
         feedback:
           "Bonne intention, mais difficile à maintenir si le prof de techno est malade.",
@@ -107,10 +99,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Leur dire d'aller au cybercafé.",
         impact: {
-          Budget: 0,
-          Durabilité: 0,
-          Inclusion: -40,
-          Responsabilité: -10,
+          Environnement: 0,
+          Société: -40,
+          Economie: -10,
         },
         feedback:
           "Exclusion totale. L'école doit compenser les inégalités, pas les ignorer.",
@@ -119,10 +110,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Créer un 'Club NIRD' de réemploi solidaire.",
         impact: {
-          Budget: -20,
-          Durabilité: 30,
-          Inclusion: 40,
-          Responsabilité: 20,
+          Environnement: 30,
+          Société: 40,
+          Economie: 20,
         },
         feedback:
           "Masterclass ! Les élèves réparent de vieux PC pour les donner aux camarades.",
@@ -131,10 +121,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Acheter des tablettes low-cost jetables.",
         impact: {
-          Budget: -200,
-          Durabilité: -20,
-          Inclusion: 20,
-          Responsabilité: -10,
+          Environnement: -20,
+          Société: 20,
+          Economie: -10,
         },
         feedback:
           "Solution court-termiste. Matériel fragile et difficilement réparable.",
@@ -150,10 +139,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Payer la licence BigBook (Verrouillé par DRM).",
         impact: {
-          Budget: -300,
-          Durabilité: 0,
-          Inclusion: -5,
-          Responsabilité: -20,
+          Environnement: 0,
+          Société: -5,
+          Economie: -20,
         },
         feedback: "Tu enfermes tes profs dans un écosystème fermé et coûteux.",
         userReaction:
@@ -162,10 +150,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Contribuer aux Ressources Éducatives Libres (REL).",
         impact: {
-          Budget: -50,
-          Durabilité: 10,
-          Inclusion: 25,
-          Responsabilité: 35,
+          Environnement: 10,
+          Société: 25,
+          Economie: 35,
         },
         feedback:
           "L'esprit du partage ! Tu crées un bien commun accessible à tous.",
@@ -175,10 +162,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Photocopier illégalement les manuels.",
         impact: {
-          Budget: -20,
-          Durabilité: -10,
-          Inclusion: 0,
-          Responsabilité: -30,
+          Environnement: -10,
+          Société: 0,
+          Economie: -30,
         },
         feedback:
           "Illégal et pas durable (papier). Pas un bon exemple pour les élèves.",
@@ -194,10 +180,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Tout déléguer à une entreprise externe.",
         impact: {
-          Budget: -200,
-          Durabilité: -5,
-          Inclusion: -10,
-          Responsabilité: -10,
+          Environnement: -5,
+          Société: -10,
+          Economie: -10,
         },
         feedback:
           "Tu perds la compétence interne. Si le contrat s'arrête, le savoir disparaît.",
@@ -206,10 +191,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Former des éco-délégués et 'Ambassadeurs NIRD'.",
         impact: {
-          Budget: -50,
-          Durabilité: 20,
-          Inclusion: 30,
-          Responsabilité: 30,
+          Environnement: 20,
+          Société: 30,
+          Economie: 30,
         },
         feedback:
           "Transmission ! Les élèves d'aujourd'hui sont les citoyens numériques de demain.",
@@ -218,10 +202,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Ne rien faire, ça tiendra bien tout seul.",
         impact: {
-          Budget: 0,
-          Durabilité: -20,
-          Inclusion: -10,
-          Responsabilité: -20,
+          Environnement: -20,
+          Société: -10,
+          Economie: -20,
         },
         feedback:
           "L'entropie gagne toujours. Sans animation, le projet s'essouffle.",
@@ -235,31 +218,31 @@ export const RANDOM_EVENTS: RandomEvent[] = [
   {
     title: "Fin de support logiciel",
     description: "Une application critique ne tourne plus sur vos vieux OS.",
-    condition: (metrics: Metrics) => metrics.Durabilité > 60,
-    impact: { Budget: -50, Durabilité: -10 },
+    condition: (metrics: Metrics) => metrics.Environnement > 60,
+    impact: { Environnement: -10 },
     type: "bad",
   },
   {
     title: "Don de matériel d'une Mairie",
     description: "La ville vous offre 30 tours PC à reconditionner !",
-    condition: (metrics: Metrics) => metrics.Responsabilité > 50,
-    impact: { Budget: 50, Durabilité: 25, Inclusion: 15 },
+    condition: (metrics: Metrics) => metrics.Economie > 50,
+    impact: { Environnement: 25, Société: 15 },
     type: "good",
   },
   {
     title: "Inspection Académique",
     description:
       "L'inspecteur est impressionné par votre souveraineté numérique.",
-    condition: (metrics: Metrics) => metrics.Responsabilité > 70,
-    impact: { Budget: 100, Responsabilité: 10 },
+    condition: (metrics: Metrics) => metrics.Economie > 70,
+    impact: { Economie: 10 },
     type: "good",
   },
   {
     title: "Panne Réseau",
     description:
       "Le bricolage a ses limites... Le réseau saute pendant un examen.",
-    condition: (metrics: Metrics) => metrics.Budget < 200,
-    impact: { Inclusion: -15, Responsabilité: -5 },
+    condition: (metrics: Metrics) => metrics.Economie < 30,
+    impact: { Société: -15, Economie: -5 },
     type: "bad",
   },
 ];

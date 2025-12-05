@@ -11,7 +11,6 @@ import { Planet } from "./components/three/Planet";
 import {
   INITIAL_METRICS,
   MIN_SCORE,
-  MIN_BUDGET,
   SCENARIOS,
   RANDOM_EVENTS,
 } from "./constants/game";
@@ -38,18 +37,10 @@ const App: React.FC = () => {
 
   const checkGameStatus = useCallback(
     (newMetrics: Metrics, step: number): GameStatus => {
-      if (newMetrics.Budget < MIN_BUDGET) {
-        return {
-          status: "gameover",
-          type: "bankruptcy",
-          message:
-            "Faillite ! L'établissement est sous tutelle. Big Tech a gagné.",
-        };
-      }
       if (
-        newMetrics.Inclusion < MIN_SCORE ||
-        newMetrics.Durabilité < MIN_SCORE ||
-        newMetrics.Responsabilité < MIN_SCORE
+        newMetrics.Société < MIN_SCORE ||
+        newMetrics.Environnement < MIN_SCORE ||
+        newMetrics.Economie < MIN_SCORE
       ) {
         return {
           status: "gameover",
@@ -59,9 +50,9 @@ const App: React.FC = () => {
       }
       if (step >= SCENARIOS.length) {
         const avg =
-          (newMetrics.Inclusion +
-            newMetrics.Durabilité +
-            newMetrics.Responsabilité) /
+          (newMetrics.Société +
+            newMetrics.Environnement +
+            newMetrics.Economie) /
           3;
         if (avg >= 75)
           return {
@@ -89,14 +80,10 @@ const App: React.FC = () => {
     Object.keys(impact).forEach((key) => {
       const metricKey = key as keyof Metrics;
       const impactValue = impact[metricKey] || 0;
-      if (metricKey === "Budget") {
-        newMetrics[metricKey] += impactValue;
-      } else {
-        newMetrics[metricKey] = Math.max(
-          0,
-          Math.min(100, newMetrics[metricKey] + impactValue)
-        );
-      }
+      newMetrics[metricKey] = Math.max(
+        0,
+        Math.min(100, newMetrics[metricKey] + impactValue)
+      );
     });
 
     setLastImpact(impact);
@@ -129,14 +116,10 @@ const App: React.FC = () => {
         Object.keys(event.impact).forEach((key) => {
           const metricKey = key as keyof Metrics;
           const impactValue = event!.impact[metricKey] || 0;
-          if (metricKey === "Budget") {
-            newMetrics[metricKey] += impactValue;
-          } else {
-            newMetrics[metricKey] = Math.max(
-              0,
-              Math.min(100, newMetrics[metricKey] + impactValue)
-            );
-          }
+          newMetrics[metricKey] = Math.max(
+            0,
+            Math.min(100, newMetrics[metricKey] + impactValue)
+          );
         });
         setRandomEvent(event);
 
