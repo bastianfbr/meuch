@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Info, Scale } from "lucide-react";
+import { Info, Scale, Users } from "lucide-react";
 import { Tooltip } from "../ui/Tooltip";
 
 interface GameHeaderProps {}
@@ -77,6 +77,14 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
             <Info size={20} />
           </button>
         </Tooltip>
+
+        <Link
+          href="/femmes-informatique"
+          className="p-2 bg-pink-500/10 hover:bg-pink-500/20 rounded-full transition border border-pink-500/30 text-pink-400 hover:text-pink-300 cursor-pointer inline-block"
+          aria-label="Femmes en Informatique"
+        >
+          <Users size={20} />
+        </Link>
       </div>
     </header>
   );
