@@ -32,6 +32,7 @@ interface PlanetProps {
   houseDensity?: number;
   buildingDensity?: number;
   totalItems?: number;
+  isDragging?: boolean;
 }
 
 export const Planet: React.FC<PlanetProps> = ({
@@ -39,6 +40,7 @@ export const Planet: React.FC<PlanetProps> = ({
   houseDensity = 0.3,
   buildingDensity = 0.2,
   totalItems = 200,
+  isDragging = false,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<{
@@ -457,10 +459,25 @@ export const Planet: React.FC<PlanetProps> = ({
   }, [treeDensity, houseDensity, buildingDensity, totalItems]);
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden rounded-2xl">
+    <div
+      id="planet-container"
+      className={`relative w-full h-[600px] overflow-hidden rounded-2xl transition-all duration-300 ${
+        isDragging
+          ? "ring-4 ring-orange-500/50 shadow-[0_0_50px_rgba(249,115,22,0.3)] scale-[1.02]"
+          : ""
+      }`}
+    >
       <div ref={mountRef} className="w-full h-full" />
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-2xl md:rounded-full px-4 py-2 border border-white/10">
+      {isDragging && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div className="bg-slate-900/80 backdrop-blur-md px-6 py-3 rounded-full border border-orange-500/50 text-orange-400 font-bold animate-pulse shadow-xl">
+            Déposez votre choix ici
+          </div>
+        </div>
+      )}
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-2xl md:rounded-full px-4 py-2 border border-white/10 z-20">
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
           <LegendItem
             icon={TreePine}
