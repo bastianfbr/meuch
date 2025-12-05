@@ -25,7 +25,7 @@ export const GameHeader: React.FC<GameHeaderProps> = ({ onInfoClick }) => (
     </div>
     <button
       onClick={onInfoClick}
-      className="p-3 bg-white/5 hover:bg-white/10 rounded-full transition border border-white/10 text-orange-400"
+      className="p-3 bg-blue-500/10 hover:bg-blue-500/20 rounded-full transition border border-blue-500/30 text-blue-400 hover:text-blue-300"
     >
       <Info size={20} />
     </button>
