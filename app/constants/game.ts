@@ -173,7 +173,207 @@ export const SCENARIOS: Scenario[] = [
     ],
   },
   {
-    phase: "Défi 5 : L'Avenir du Village 🌟",
+    phase: "Défi 5 : La Sobriété Numérique 📉",
+    context:
+      "Le serveur de l'école surchauffe. Il faut réduire l'empreinte numérique des données stockées.",
+    options: [
+      {
+        text: "Tout garder 'au cas où' (Stockage illimité).",
+        impact: {
+          Environnement: -20,
+          Société: 0,
+          Economie: -10,
+        },
+        feedback:
+          "Mauvaise idée. Le stockage inutile consomme de l'énergie et coûte cher.",
+        userReaction: "💾 'Mon disque dur est plein, on en rachète un ?'",
+      },
+      {
+        text: "Organiser un 'Cyber-CleanUp Day' avec les élèves.",
+        impact: {
+          Environnement: 20,
+          Société: 20,
+          Economie: 0,
+        },
+        feedback:
+          "Excellent ! On nettoie les données inutiles et on sensibilise à l'impact du numérique.",
+        userReaction: "🧹 'J'ai supprimé 10Go de vieux fichiers !'",
+      },
+      {
+        text: "Acheter un deuxième serveur plus puissant.",
+        impact: {
+          Environnement: -30,
+          Société: 0,
+          Economie: -40,
+        },
+        feedback:
+          "La fuite en avant technologique. Plus de matériel = plus d'impact carbone.",
+        userReaction: "🔌 'La facture d'électricité va encore augmenter...'",
+      },
+    ],
+  },
+  {
+    phase: "Défi 6 : L'Accessibilité Web 👁️",
+    context:
+      "Le site du village n'est pas accessible aux malvoyants. La loi impose une mise en conformité.",
+    options: [
+      {
+        text: "Refaire le site en respectant le RGAA.",
+        impact: {
+          Environnement: 0,
+          Société: 40,
+          Economie: -10,
+        },
+        feedback:
+          "Inclusif ! Tout le monde doit pouvoir accéder à l'information publique.",
+        userReaction: "👓 'Enfin je peux lire le menu de la cantine !'",
+      },
+      {
+        text: "Installer un widget 'Accessibilité' (Surcouche).",
+        impact: {
+          Environnement: 0,
+          Société: -10,
+          Economie: -10,
+        },
+        feedback:
+          "Inefficace et souvent contre-productif. C'est du 'handi-washing'.",
+        userReaction: "🚫 'Ça ne marche pas avec mon lecteur d'écran...'",
+      },
+      {
+        text: "Ignorer, personne ne se plaindra.",
+        impact: {
+          Environnement: 0,
+          Société: -30,
+          Economie: 0,
+        },
+        feedback:
+          "Illégal et discriminant. Vous excluez une partie de la population.",
+        userReaction: "😠 'C'est honteux de ne pas penser à nous.'",
+      },
+    ],
+  },
+  {
+    phase: "Défi 7 : Les Smartphones en Classe 📱",
+    context:
+      "Débat sur l'équipement : BYOD (Apportez votre appareil) ou équipement fourni par l'école ?",
+    options: [
+      {
+        text: "BYOD : Chacun utilise son smartphone.",
+        impact: {
+          Environnement: -10,
+          Société: -20,
+          Economie: 10,
+        },
+        feedback:
+          "Crée des inégalités (iPhone vs vieux Android) et pousse au renouvellement.",
+        userReaction: "📱 'J'ai honte de mon vieux téléphone...'",
+      },
+      {
+        text: "Équipement partagé : Classes mobiles reconditionnées.",
+        impact: {
+          Environnement: 30,
+          Société: 30,
+          Economie: -20,
+        },
+        feedback:
+          "La meilleure solution ! Matériel durable, égalitaire et géré par l'école.",
+        userReaction: "💻 'On a tous le même outil pour travailler.'",
+      },
+      {
+        text: "1 tablette neuve par élève (One-to-One).",
+        impact: {
+          Environnement: -50,
+          Société: 10,
+          Economie: -50,
+        },
+        feedback:
+          "Catastrophe écologique et financière. Matériel fragile et vite obsolète.",
+        userReaction: "💥 'Oups, j'ai marché sur ma tablette...'",
+      },
+    ],
+  },
+  {
+    phase: "Défi 8 : L'Intelligence Artificielle 🤖",
+    context:
+      "Les élèves utilisent ChatGPT pour faire leurs devoirs. Les profs sont perdus.",
+    options: [
+      {
+        text: "Interdire et punir l'utilisation d'IA.",
+        impact: {
+          Environnement: 0,
+          Société: -20,
+          Economie: 0,
+        },
+        feedback:
+          "L'interdiction ne marche pas. Il vaut mieux éduquer que punir.",
+        userReaction: "🤫 'Je l'utilise en cachette de toute façon.'",
+      },
+      {
+        text: "Ateliers 'Comprendre et critiquer l'IA'.",
+        impact: {
+          Environnement: 10,
+          Société: 30,
+          Economie: 0,
+        },
+        feedback:
+          "Bravo ! Former l'esprit critique est essentiel face aux nouveaux outils.",
+        userReaction: "🧠 'L'IA raconte parfois n'importe quoi !'",
+      },
+      {
+        text: "Acheter une solution 'Détecteur d'IA'.",
+        impact: {
+          Environnement: 0,
+          Société: -10,
+          Economie: -30,
+        },
+        feedback:
+          "Argent jeté par les fenêtres. Ces outils ne sont pas fiables.",
+        userReaction: "🤖 'Le prof m'a accusé à tort !'",
+      },
+    ],
+  },
+  {
+    phase: "Défi 9 : La Vidéoprotection 🎥",
+    context:
+      "Des vols de souris ont eu lieu. On propose d'installer des caméras connectées partout.",
+    options: [
+      {
+        text: "Installer la reconnaissance faciale à l'entrée.",
+        impact: {
+          Environnement: -10,
+          Société: -40,
+          Economie: -40,
+        },
+        feedback:
+          "Surveillance de masse illégale et disproportionnée. Libertés en danger.",
+        userReaction: "👁️ 'Big Brother is watching you...'",
+      },
+      {
+        text: "Mettre des caméras simples aux endroits stratégiques.",
+        impact: {
+          Environnement: 0,
+          Société: -10,
+          Economie: -20,
+        },
+        feedback:
+          "Solution classique mais coûteuse. Est-ce vraiment efficace ?",
+        userReaction: "📹 'On se sent surveillés en permanence.'",
+      },
+      {
+        text: "Miser sur la confiance et la responsabilisation.",
+        impact: {
+          Environnement: 0,
+          Société: 30,
+          Economie: 0,
+        },
+        feedback:
+          "Le pari de l'éducation. Plus durable que la répression.",
+        userReaction: "🤝 'On fait attention au matériel commun.'",
+      },
+    ],
+  },
+  {
+    phase: "Défi 10 : L'Avenir du Village 🌟",
     context:
       "Le projet arrive à terme. Comment pérenniser cette résistance numérique ?",
     options: [
