@@ -8,18 +8,18 @@ interface GameHeaderProps {
 export const GameHeader: React.FC<GameHeaderProps> = ({ onInfoClick }) => (
   <header className="flex justify-between items-center mb-8">
     <div className="flex items-center gap-3">
-      <div className="w-12 h-12 rounded-xl bg-linear-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-lg shadow-orange-500/20">
-        <ShieldCheck size={28} className="text-white" />
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center invert saturate-0">
+        <img src="/meuch.svg" alt="Meuch" className="w-full h-full" />
       </div>
       <div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
-          VILLAGE{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-400 to-red-500">
-            RÉSISTANT
+        <h1 className="text-2xl font-black text-white tracking-wide uppercase">
+          Opération{" "}
+          <span className="text-transparent uppercase bg-clip-text bg-linear-to-r from-orange-400 to-red-500">
+            N.I.R.D.
           </span>
         </h1>
-        <p className="text-xs text-gray-500 font-bold uppercase tracking-widest">
-          Opération N.I.R.D.
+        <p className="text-xs text-gray-300 font-bold  tracking-widest pl-0.5">
+          Défends ton village, choisis un numérique responsable !
         </p>
       </div>
     </div>

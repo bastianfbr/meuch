@@ -182,7 +182,7 @@ const App: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         <GameHeader onInfoClick={() => setShowInfo(true)} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-center">
           <div className="order-2 lg:order-1">
             <Planet
               treeDensity={metrics.Environnement / 100}
