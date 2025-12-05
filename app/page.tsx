@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from "react";
 import { GameHeader } from "./components/game/GameHeader";
-import { GameInfoModal } from "./components/game/GameInfoModal";
 import { WelcomeCard } from "./components/game/WelcomeCard";
 import { ScenarioCard } from "./components/game/ScenarioCard";
 import { ImpactCard } from "./components/game/ImpactCard";
@@ -33,7 +32,6 @@ const App: React.FC = () => {
   const [lastSelection, setLastSelection] = useState<LastSelection | null>(
     null
   );
-  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   const checkGameStatus = useCallback(
     (newMetrics: Metrics, step: number): GameStatus => {
@@ -169,10 +167,6 @@ const App: React.FC = () => {
     setLastSelection(null);
   };
 
-  if (showInfo) {
-    return <GameInfoModal onClose={() => setShowInfo(false)} />;
-  }
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-orange-500/30">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -181,7 +175,7 @@ const App: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
-        <GameHeader onInfoClick={() => setShowInfo(true)} />
+        <GameHeader />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-center">
           <div className="order-2 lg:order-1">
