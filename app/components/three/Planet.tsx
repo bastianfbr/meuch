@@ -237,24 +237,35 @@ export const Planet: React.FC<PlanetProps> = ({
       object.rotateY(Math.random() * Math.PI * 2);
     };
 
-    const normalizedTotal = treeDensity + houseDensity + buildingDensity;
-    const treeThreshold = treeDensity / normalizedTotal;
-    const houseThreshold = treeThreshold + houseDensity / normalizedTotal;
+    const numTrees = Math.floor(totalItems * treeDensity);
+    const numHouses = Math.floor(totalItems * houseDensity);
+    const numBuildings = Math.floor(totalItems * buildingDensity);
 
-    for (let i = 0; i < totalItems; i++) {
+    const items = [
+      ...Array(numTrees).fill("tree"),
+      ...Array(numHouses).fill("house"),
+      ...Array(numBuildings).fill("building"),
+    ];
+
+    // Shuffle items for random distribution
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [items[i], items[j]] = [items[j], items[i]];
+    }
+
+    items.forEach((type) => {
       const u = Math.random();
       const v = Math.random();
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
 
-      const type = Math.random();
       let item;
 
-      if (type < treeThreshold) {
+      if (type === "tree") {
         item = createModernTree();
         const s = 0.5 + Math.random() * 0.6;
         item.scale.set(s, s, s);
-      } else if (type < houseThreshold) {
+      } else if (type === "house") {
         item = createModernHouse();
         const s = 0.6 + Math.random() * 0.4;
         item.scale.set(s, s, s);
@@ -266,7 +277,7 @@ export const Planet: React.FC<PlanetProps> = ({
 
       scene.add(item);
       placeOnSphere(item, PLANET_RADIUS, phi, theta);
-    }
+    });
 
     const cloudGroup = new THREE.Group();
     scene.add(cloudGroup);

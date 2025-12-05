@@ -185,7 +185,11 @@ const App: React.FC = () => {
         <MetricsDashboard metrics={metrics} />
 
         <div className="mb-8">
-          <Planet treeDensity={0.1} houseDensity={0.5} buildingDensity={0.1} />
+          <Planet
+            treeDensity={0.33}
+            houseDensity={0.33}
+            buildingDensity={0.33}
+          />
         </div>
 
         <div className="relative min-h-[400px]">
