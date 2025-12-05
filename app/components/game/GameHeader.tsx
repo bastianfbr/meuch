@@ -33,22 +33,13 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Tooltip
-          title="📋 Mentions Légales"
-          content={
-            <p>
-              L'ensemble des ressources présentes sur cette application ont été
-              créées à 100% par nos soins.
-            </p>
-          }
+        <Link
+          href="/mentions-legales"
+          className="p-2 bg-slate-500/10 hover:bg-slate-500/20 rounded-full transition border border-slate-500/30 text-slate-400 hover:text-slate-300 cursor-pointer inline-block"
+          aria-label="Mentions légales"
         >
-          <button
-            className="p-2 bg-slate-500/10 hover:bg-slate-500/20 rounded-full transition border border-slate-500/30 text-slate-400 hover:text-slate-300 cursor-pointer"
-            aria-label="Mentions légales"
-          >
-            <Scale size={20} />
-          </button>
-        </Tooltip>
+          <Scale size={20} />
+        </Link>
 
         <Tooltip
           title="📚 Découvrir la démarche NIRD"
