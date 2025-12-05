@@ -29,21 +29,24 @@ export const ImpactCard: React.FC<ImpactCardProps> = ({
         <FeedbackToast feedback={feedback} userReaction={userReaction} />
       )}
 
-      <div className="grid grid-cols-2 gap-3 my-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6">
         {impact &&
           Object.entries(impact).map(([k, v]) => (
             <div
               key={k}
-              className={`flex justify-between items-center p-3 rounded-lg border ${
-                v > 0
-                  ? "bg-green-500/10 border-green-500/20 text-green-400"
-                  : v < 0
-                  ? "bg-red-500/10 border-red-500/20 text-red-400"
-                  : "bg-slate-800 border-slate-700 text-gray-500"
-              }`}
+              className={`flex justify-between items-center p-3 rounded-lg border
+                ${
+                  v > 0
+                    ? "bg-green-500/10 border-green-500/20 text-green-400"
+                    : v < 0
+                    ? "bg-red-500/10 border-red-500/20 text-red-400"
+                    : "bg-slate-800 border-slate-700 text-gray-500"
+                }`}
             >
-              <span className="text-xs font-bold uppercase">{k}</span>
-              <span className="font-bold font-mono">
+              <span className="text-xs font-bold uppercase truncate mr-2">
+                {k}
+              </span>
+              <span className="font-bold font-mono whitespace-nowrap">
                 {v > 0 ? "+" : ""}
                 {v}
               </span>

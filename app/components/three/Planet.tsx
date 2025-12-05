@@ -346,8 +346,8 @@ export const Planet: React.FC<PlanetProps> = ({
     <div className="relative w-full h-[600px] bg-[#0f172a] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
       <div ref={mountRef} className="w-full h-full" />
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-full px-4 py-2 border border-white/10">
-        <div className="flex items-center gap-6">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-2xl md:rounded-full px-4 py-2 border border-white/10">
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
           <LegendItem
             icon={TreePine}
             label="Environnement"
