@@ -70,7 +70,7 @@ export const ImpactCard: React.FC<ImpactCardProps> = ({
 
       <button
         onClick={onNext}
-        className="w-full py-4 rounded-xl bg-linear-to-r from-orange-500 to-red-600 font-bold text-white shadow-lg shadow-orange-500/20 hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2"
+        className="w-full py-4 rounded-xl bg-linear-to-r from-orange-500 to-red-600 font-bold text-white shadow-lg shadow-orange-500/20 hover:brightness-110 active:scale-95 transition flex items-center justify-center gap-2 cursor-pointer"
       >
         Mission Suivante <ArrowRight size={20} />
       </button>

@@ -59,7 +59,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
       <button
         onClick={onReset}
-        className="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:scale-105 transition flex items-center gap-2 mx-auto"
+        className="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:scale-105 transition flex items-center gap-2 mx-auto cursor-pointer"
       >
         <RefreshCcw size={20} /> Recommencer la résistance
       </button>

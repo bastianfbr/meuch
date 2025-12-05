@@ -75,7 +75,7 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
                 href="https://nird.forge.apps.education.fr/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-blue-300 font-medium hover:text-blue-200 underline transition"
+                className="text-xs text-blue-300 font-medium hover:text-blue-200 underline transition cursor-pointer"
               >
                 👉 Cliquez ici pour en savoir plus
               </a>

@@ -35,9 +35,9 @@ export const ScenarioCard: React.FC<ScenarioCardProps> = ({
         <button
           key={i}
           onClick={() => onChoice(opt)}
-          className="w-full group text-left p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-linear-to-r hover:from-orange-500/10 hover:to-red-500/10 hover:border-orange-500/30 transition-all duration-300"
+          className="w-full group text-left p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-linear-to-r hover:from-orange-500/10 hover:to-red-500/10 hover:border-orange-500/30 transition-all duration-300 cursor-pointer"
         >
-          <div className="flex gap-4">
+          <div className="flex gap-4 items-center">
             <div className="w-8 h-8 rounded-full bg-slate-800 text-gray-400 flex items-center justify-center font-bold text-sm group-hover:bg-orange-500 group-hover:text-white transition-colors">
               {i + 1}
             </div>

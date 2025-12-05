@@ -83,7 +83,7 @@ export const WelcomeCard: React.FC<WelcomeCardProps> = ({ onStart }) => (
 
     <button
       onClick={onStart}
-      className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-5 font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300"
+      className="w-full group relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-5 font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-orange-500/40 transition-all duration-300 cursor-pointer"
     >
       <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors"></div>
       <div className="relative flex items-center justify-center gap-3">
