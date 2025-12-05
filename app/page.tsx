@@ -32,6 +32,7 @@ const App: React.FC = () => {
   const [lastSelection, setLastSelection] = useState<LastSelection | null>(
     null
   );
+  const [isDragging, setIsDragging] = useState(false);
 
   const checkGameStatus = useCallback(
     (newMetrics: Metrics, step: number): GameStatus => {
@@ -183,6 +184,7 @@ const App: React.FC = () => {
               treeDensity={metrics.Environnement / 100}
               houseDensity={metrics.Société / 100}
               buildingDensity={metrics.Economie / 100}
+              isDragging={isDragging}
             />
           </div>
 
@@ -195,6 +197,7 @@ const App: React.FC = () => {
                 currentStep={currentStep}
                 totalScenarios={SCENARIOS.length}
                 onChoice={handleChoice}
+                onDragStateChange={setIsDragging}
               />
             ) : (
               <>
