@@ -169,16 +169,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-orange-500/30">
+    <div className="flex flex-col min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-orange-500/30">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-orange-600/10 rounded-full blur-[150px] opacity-60"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[150px] opacity-60"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10 flex flex-1 flex-col">
         <GameHeader />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 items-center flex-1">
           <div className="order-2 lg:order-1">
             <Planet
               treeDensity={metrics.Environnement / 100}
