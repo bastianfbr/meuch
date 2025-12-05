@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Server, ArrowRight, GripVertical } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Server, GripVertical } from "lucide-react";
 import { Card } from "../ui/Card";
 import type { Scenario, Option } from "../../types/game";
 import { createPortal } from "react-dom";
@@ -100,9 +100,6 @@ const DraggableOption: React.FC<DraggableOptionProps> = ({
       >
         {option.text}
       </span>
-      {!isDragging && (
-        <ArrowRight className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-orange-500" />
-      )}
     </div>
   );
 
@@ -167,7 +164,7 @@ export const ScenarioCard: React.FC<ScenarioCardProps> = ({
     </h2>
 
     <div className="space-y-3 mt-8">
-      <p className="text-xs text-gray-500 uppercase font-bold tracking-widest mb-2 flex items-center gap-2">
+      <p className="text-xs text-gray-400 uppercase font-bold tracking-widest mb-2 flex items-center gap-2">
         <GripVertical size={14} /> Glissez votre choix vers la planète
       </p>
       {scenario.options.map((opt, i) => (

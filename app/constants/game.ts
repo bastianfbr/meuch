@@ -1,12 +1,12 @@
 import type { Metrics, Scenario, RandomEvent } from "../types/game";
 
 export const INITIAL_METRICS: Metrics = {
-  Société: 50,
-  Environnement: 50,
-  Economie: 50,
+  Société: 25,
+  Environnement: 25,
+  Economie: 25,
 };
 
-export const MIN_SCORE = 15;
+export const MIN_SCORE = 0;
 
 export const SCENARIOS: Scenario[] = [
   {
@@ -17,9 +17,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Obéir à Goliath : On jette tout et on rachète du neuf.",
         impact: {
-          Environnement: -40,
+          Environnement: -15,
           Société: 0,
-          Economie: -10,
+          Economie: -5,
         },
         feedback:
           "Désastre écologique ! Des machines fonctionnelles partent à la benne. Le budget explose.",
@@ -28,9 +28,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "La Résistance Linux : On installe un OS libre et léger.",
         impact: {
-          Environnement: 40,
-          Société: 10,
-          Economie: 30,
+          Environnement: 20,
+          Société: 5,
+          Economie: 15,
         },
         feedback:
           "Esprit NIRD ! Tu prolonges la vie du matériel et tu te libères des licences coûteuses.",
@@ -39,9 +39,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Ignorer l'alerte : On garde Windows sans mises à jour.",
         impact: {
-          Environnement: 10,
+          Environnement: 5,
           Société: 0,
-          Economie: -50,
+          Economie: -15,
         },
         feedback:
           "Dangereux ! Tu exposes les données des élèves aux failles de sécurité.",
@@ -59,7 +59,7 @@ export const SCENARIOS: Scenario[] = [
         impact: {
           Environnement: -5,
           Société: 10,
-          Economie: -40,
+          Economie: -20,
         },
         feedback:
           "Si c'est gratuit, c'est que l'élève est le produit. Tes données partent hors UE.",
@@ -69,9 +69,9 @@ export const SCENARIOS: Scenario[] = [
       {
         text: "Utiliser 'La Forge' des communs numériques.",
         impact: {
-          Environnement: 10,
-          Société: 20,
-          Economie: 40,
+          Environnement: 5,
+          Société: 10,
+          Economie: 20,
         },
         feedback:
           "Bravo ! Tu utilises des outils souverains, hébergés en France et open source.",
@@ -366,8 +366,7 @@ export const SCENARIOS: Scenario[] = [
           Société: 30,
           Economie: 0,
         },
-        feedback:
-          "Le pari de l'éducation. Plus durable que la répression.",
+        feedback: "Le pari de l'éducation. Plus durable que la répression.",
         userReaction: "🤝 'On fait attention au matériel commun.'",
       },
     ],

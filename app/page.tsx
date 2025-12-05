@@ -37,9 +37,9 @@ const App: React.FC = () => {
   const checkGameStatus = useCallback(
     (newMetrics: Metrics, step: number): GameStatus => {
       if (
-        newMetrics.Société < MIN_SCORE ||
-        newMetrics.Environnement < MIN_SCORE ||
-        newMetrics.Economie < MIN_SCORE
+        newMetrics.Société <= MIN_SCORE ||
+        newMetrics.Environnement <= MIN_SCORE ||
+        newMetrics.Economie <= MIN_SCORE
       ) {
         return {
           status: "gameover",
