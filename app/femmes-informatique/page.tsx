@@ -15,11 +15,11 @@ export default function FemmesInformatique() {
         </Link>
 
         <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50 shadow-xl mb-8">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
             <div className="w-16 h-16 rounded-full bg-linear-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-lg shadow-pink-500/20">
               <Users size={32} className="text-white" />
             </div>
-            <div>
+            <div className="text-center sm:text-left">
               <h1 className="text-4xl font-black text-white mb-2">
                 Femmes et Informatique
               </h1>

@@ -17,7 +17,7 @@ export const GameHeader: React.FC<GameHeaderProps> = () => {
   return (
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-xl flex items-center justify-center invert saturate-0">
+        <div className="hidden sm:flex w-12 h-12 rounded-xl items-center justify-center invert saturate-0">
           <img src="/meuch.svg" alt="Meuch" className="w-full h-full" />
         </div>
         <div>
