@@ -180,47 +180,49 @@ const App: React.FC = () => {
         <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[150px] opacity-60"></div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
         <GameHeader onInfoClick={() => setShowInfo(true)} />
         <MetricsDashboard metrics={metrics} />
 
-        <div className="mb-8">
-          <Planet
-            treeDensity={metrics.Environnement / 100}
-            houseDensity={metrics.Société / 100}
-            buildingDensity={metrics.Economie / 100}
-          />
-        </div>
-
-        <div className="relative min-h-[400px]">
-          {gameState === "playing" ? (
-            <ScenarioCard
-              scenario={SCENARIOS[currentStep]}
-              currentStep={currentStep}
-              totalScenarios={SCENARIOS.length}
-              onChoice={handleChoice}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div className="order-2 lg:order-1">
+            <Planet
+              treeDensity={metrics.Environnement / 100}
+              houseDensity={metrics.Société / 100}
+              buildingDensity={metrics.Economie / 100}
             />
-          ) : (
-            <>
-              {gameState === "gameover" || gameState === "win" ? (
-                <GameOverCard
-                  gameState={gameState}
-                  endTitle={lastSelection?.endTitle}
-                  endMessage={lastSelection?.endMsg}
-                  metrics={metrics}
-                  onReset={resetGame}
-                />
-              ) : (
-                <ImpactCard
-                  feedback={lastSelection?.feedback}
-                  userReaction={lastSelection?.reaction}
-                  impact={lastImpact}
-                  randomEvent={randomEvent}
-                  onNext={nextPhase}
-                />
-              )}
-            </>
-          )}
+          </div>
+
+          <div className="order-1 lg:order-2 relative min-h-[400px]">
+            {gameState === "playing" ? (
+              <ScenarioCard
+                scenario={SCENARIOS[currentStep]}
+                currentStep={currentStep}
+                totalScenarios={SCENARIOS.length}
+                onChoice={handleChoice}
+              />
+            ) : (
+              <>
+                {gameState === "gameover" || gameState === "win" ? (
+                  <GameOverCard
+                    gameState={gameState}
+                    endTitle={lastSelection?.endTitle}
+                    endMessage={lastSelection?.endMsg}
+                    metrics={metrics}
+                    onReset={resetGame}
+                  />
+                ) : (
+                  <ImpactCard
+                    feedback={lastSelection?.feedback}
+                    userReaction={lastSelection?.reaction}
+                    impact={lastImpact}
+                    randomEvent={randomEvent}
+                    onNext={nextPhase}
+                  />
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

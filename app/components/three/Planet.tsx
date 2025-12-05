@@ -38,7 +38,7 @@ export const Planet: React.FC<PlanetProps> = ({
   treeDensity = 0.5,
   houseDensity = 0.3,
   buildingDensity = 0.2,
-  totalItems = 500,
+  totalItems = 200,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -60,10 +60,10 @@ export const Planet: React.FC<PlanetProps> = ({
     camera.position.set(0, 0, 85);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.2;
     currentMount.appendChild(renderer.domElement);
@@ -83,8 +83,8 @@ export const Planet: React.FC<PlanetProps> = ({
     const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
     dirLight.position.set(50, 50, 50);
     dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.mapSize.width = 1024;
+    dirLight.shadow.mapSize.height = 1024;
     dirLight.shadow.camera.near = 0.5;
     dirLight.shadow.camera.far = 200;
     dirLight.shadow.camera.left = -50;
@@ -97,7 +97,7 @@ export const Planet: React.FC<PlanetProps> = ({
     const hemisphereLight = new THREE.HemisphereLight(0x87ceeb, 0x1e293b, 0.6);
     scene.add(hemisphereLight);
 
-    const geometryPlanet = new THREE.IcosahedronGeometry(PLANET_RADIUS, 6);
+    const geometryPlanet = new THREE.IcosahedronGeometry(PLANET_RADIUS, 4);
 
     const materialPlanet = new THREE.MeshStandardMaterial({
       color: 0x1e293b,
@@ -123,7 +123,7 @@ export const Planet: React.FC<PlanetProps> = ({
     const createModernTree = () => {
       const group = new THREE.Group();
       const trunk = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.2, 0.4, 1.2, 8),
+        new THREE.CylinderGeometry(0.2, 0.4, 1.2, 6),
         new THREE.MeshStandardMaterial({
           color: 0x475569,
           roughness: 0.9,
@@ -135,7 +135,7 @@ export const Planet: React.FC<PlanetProps> = ({
       group.add(trunk);
 
       const leaves = new THREE.Mesh(
-        new THREE.ConeGeometry(1.2, 3, 8),
+        new THREE.ConeGeometry(1.2, 3, 6),
         new THREE.MeshStandardMaterial({
           color: 0x4ade80,
           flatShading: true,
@@ -169,7 +169,7 @@ export const Planet: React.FC<PlanetProps> = ({
 
       const roofColor = Math.random() > 0.5 ? 0xfb923c : 0xea580c;
       const roof = new THREE.Mesh(
-        new THREE.ConeGeometry(1.6, 1.2, 6),
+        new THREE.ConeGeometry(1.6, 1.2, 5),
         new THREE.MeshStandardMaterial({
           color: roofColor,
           flatShading: true,
@@ -300,7 +300,7 @@ export const Planet: React.FC<PlanetProps> = ({
     const cloudGroup = new THREE.Group();
     scene.add(cloudGroup);
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 15; i++) {
       const cloud = createCloud();
       const u = Math.random();
       const v = Math.random();
