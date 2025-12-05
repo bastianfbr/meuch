@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { TreePine, Home, Building2 } from "lucide-react";
@@ -41,15 +41,19 @@ export const Planet: React.FC<PlanetProps> = ({
   totalItems = 200,
 }) => {
   const mountRef = useRef<HTMLDivElement>(null);
+  const itemsRef = useRef<{
+    trees: THREE.Group[];
+    houses: THREE.Group[];
+    buildings: THREE.Group[];
+  }>({ trees: [], houses: [], buildings: [] });
 
+  // Initialize scene only once
   useEffect(() => {
     const PLANET_RADIUS = 25;
     const currentMount = mountRef.current;
     if (!currentMount) return;
 
     const scene = new THREE.Scene();
-    const bgColor = 0x0f172a;
-    scene.background = new THREE.Color(bgColor);
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -59,7 +63,7 @@ export const Planet: React.FC<PlanetProps> = ({
     );
     camera.position.set(0, 0, 85);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.shadowMap.enabled = true;
@@ -77,10 +81,7 @@ export const Planet: React.FC<PlanetProps> = ({
     controls.minDistance = 40;
     controls.maxDistance = 150;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+    const dirLight = new THREE.DirectionalLight(0xffd4a3, 2.0);
     dirLight.position.set(50, 50, 50);
     dirLight.castShadow = true;
     dirLight.shadow.mapSize.width = 1024;
@@ -94,8 +95,10 @@ export const Planet: React.FC<PlanetProps> = ({
     dirLight.shadow.bias = -0.0001;
     scene.add(dirLight);
 
-    const hemisphereLight = new THREE.HemisphereLight(0x87ceeb, 0x1e293b, 0.6);
-    scene.add(hemisphereLight);
+    // Fill light for dark side
+    const fillLight = new THREE.DirectionalLight(0x9333ea, 1.0);
+    fillLight.position.set(-50, -30, -50);
+    scene.add(fillLight);
 
     const geometryPlanet = new THREE.IcosahedronGeometry(PLANET_RADIUS, 4);
 
@@ -255,47 +258,67 @@ export const Planet: React.FC<PlanetProps> = ({
       object.rotateY(Math.random() * Math.PI * 2);
     };
 
-    const numTrees = Math.floor(totalItems * treeDensity);
-    const numHouses = Math.floor(totalItems * houseDensity);
-    const numBuildings = Math.floor(totalItems * buildingDensity);
+    const numTrees = totalItems;
+    const numHouses = totalItems;
+    const numBuildings = totalItems;
 
-    const items = [
-      ...Array(numTrees).fill("tree"),
-      ...Array(numHouses).fill("house"),
-      ...Array(numBuildings).fill("building"),
-    ];
+    const trees: THREE.Group[] = [];
+    const houses: THREE.Group[] = [];
+    const buildings: THREE.Group[] = [];
 
-    // Shuffle items for random distribution
-    for (let i = items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
-    }
-
-    items.forEach((type) => {
+    // Create all trees
+    for (let i = 0; i < numTrees; i++) {
       const u = Math.random();
       const v = Math.random();
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
 
-      let item;
-
-      if (type === "tree") {
-        item = createModernTree();
-        const s = 0.5 + Math.random() * 0.6;
-        item.scale.set(s, s, s);
-      } else if (type === "house") {
-        item = createModernHouse();
-        const s = 0.6 + Math.random() * 0.4;
-        item.scale.set(s, s, s);
-      } else {
-        item = createModernBuilding();
-        const s = 0.7 + Math.random() * 0.5;
-        item.scale.set(s, s, s);
-      }
-
+      const item = createModernTree();
+      const s = 0.5 + Math.random() * 0.6;
+      item.scale.set(0, 0, 0); // Start hidden
+      item.userData.baseScale = s;
+      item.visible = false;
       scene.add(item);
       placeOnSphere(item, PLANET_RADIUS, phi, theta);
-    });
+      trees.push(item);
+    }
+
+    // Create all houses
+    for (let i = 0; i < numHouses; i++) {
+      const u = Math.random();
+      const v = Math.random();
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+
+      const item = createModernHouse();
+      const s = 0.6 + Math.random() * 0.4;
+      item.scale.set(0, 0, 0); // Start hidden
+      item.userData.baseScale = s;
+      item.visible = false;
+      scene.add(item);
+      placeOnSphere(item, PLANET_RADIUS, phi, theta);
+      houses.push(item);
+    }
+
+    // Create all buildings
+    for (let i = 0; i < numBuildings; i++) {
+      const u = Math.random();
+      const v = Math.random();
+      const theta = 2 * Math.PI * u;
+      const phi = Math.acos(2 * v - 1);
+
+      const item = createModernBuilding();
+      const s = 0.7 + Math.random() * 0.5;
+      item.scale.set(0, 0, 0); // Start hidden
+      item.userData.baseScale = s;
+      item.visible = false;
+      scene.add(item);
+      placeOnSphere(item, PLANET_RADIUS, phi, theta);
+      buildings.push(item);
+    }
+
+    // Store references
+    itemsRef.current = { trees, houses, buildings };
 
     const cloudGroup = new THREE.Group();
     scene.add(cloudGroup);
@@ -311,7 +334,43 @@ export const Planet: React.FC<PlanetProps> = ({
 
       placeOnSphere(cloud, altitude, phi, theta);
 
+      // Start clouds invisible and animate them in
+      cloud.scale.set(0, 0, 0);
+      cloud.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.material.opacity = 0;
+        }
+      });
+
       cloudGroup.add(cloud);
+
+      // Animate cloud appearance with delay
+      const delay = i * 50; // Stagger animation
+      setTimeout(() => {
+        const startTime = Date.now();
+        const duration = 800;
+
+        const animateCloud = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+
+          cloud.scale.set(eased, eased, eased);
+          cloud.traverse((child) => {
+            if (child instanceof THREE.Mesh && child.material.transparent) {
+              child.material.opacity = 0.85 * eased;
+            }
+          });
+
+          if (progress < 1) {
+            requestAnimationFrame(animateCloud);
+          }
+        };
+
+        animateCloud();
+      }, delay);
     }
 
     let animationId: number;
@@ -340,10 +399,64 @@ export const Planet: React.FC<PlanetProps> = ({
       if (currentMount) currentMount.removeChild(renderer.domElement);
       renderer.dispose();
     };
+  }, [totalItems]);
+
+  // Update visibility based on density changes with animation
+  useEffect(() => {
+    const { trees, houses, buildings } = itemsRef.current;
+
+    const numTreesVisible = Math.floor(totalItems * treeDensity);
+    const numHousesVisible = Math.floor(totalItems * houseDensity);
+    const numBuildingsVisible = Math.floor(totalItems * buildingDensity);
+
+    const animateItems = (
+      items: THREE.Group[],
+      targetVisible: number,
+      duration: number = 500,
+      baseDelay: number = 0
+    ) => {
+      items.forEach((item, index) => {
+        const shouldBeVisible = index < targetVisible;
+        const baseScale = item.userData.baseScale || 1;
+        const currentScale = item.scale.x;
+        const targetScale = shouldBeVisible ? baseScale : 0;
+
+        if (Math.abs(currentScale - targetScale) > 0.01) {
+          const startScale = currentScale;
+          const itemDelay = baseDelay + index * 5; // 5ms delay between each item
+
+          setTimeout(() => {
+            const startTime = Date.now();
+
+            const animate = () => {
+              const elapsed = Date.now() - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+
+              // Ease out cubic for smooth animation
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const newScale = startScale + (targetScale - startScale) * eased;
+
+              item.scale.set(newScale, newScale, newScale);
+              item.visible = newScale > 0.01;
+
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
+
+            animate();
+          }, itemDelay);
+        }
+      });
+    };
+
+    animateItems(trees, numTreesVisible);
+    animateItems(houses, numHousesVisible);
+    animateItems(buildings, numBuildingsVisible);
   }, [treeDensity, houseDensity, buildingDensity, totalItems]);
 
   return (
-    <div className="relative w-full h-[600px] bg-[#0f172a] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+    <div className="relative w-full h-[600px] overflow-hidden rounded-2xl">
       <div ref={mountRef} className="w-full h-full" />
 
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm rounded-2xl md:rounded-full px-4 py-2 border border-white/10">
