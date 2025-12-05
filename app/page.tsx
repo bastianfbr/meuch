@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from "react";
 import { GameHeader } from "./components/game/GameHeader";
 import { GameInfoModal } from "./components/game/GameInfoModal";
+import { WelcomeCard } from "./components/game/WelcomeCard";
 import { ScenarioCard } from "./components/game/ScenarioCard";
 import { ImpactCard } from "./components/game/ImpactCard";
 import { GameOverCard } from "./components/game/GameOverCard";
@@ -26,7 +27,7 @@ import type {
 const App: React.FC = () => {
   const [metrics, setMetrics] = useState<Metrics>(INITIAL_METRICS);
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const [gameState, setGameState] = useState<GameState>("playing");
+  const [gameState, setGameState] = useState<GameState>("welcome");
   const [randomEvent, setRandomEvent] = useState<RandomEvent | null>(null);
   const [lastImpact, setLastImpact] = useState<Impact | null>(null);
   const [lastSelection, setLastSelection] = useState<LastSelection | null>(
@@ -162,7 +163,7 @@ const App: React.FC = () => {
   const resetGame = (): void => {
     setMetrics(INITIAL_METRICS);
     setCurrentStep(0);
-    setGameState("playing");
+    setGameState("welcome");
     setRandomEvent(null);
     setLastImpact(null);
     setLastSelection(null);
@@ -192,7 +193,9 @@ const App: React.FC = () => {
           </div>
 
           <div className="order-1 lg:order-2 relative min-h-[400px]">
-            {gameState === "playing" ? (
+            {gameState === "welcome" ? (
+              <WelcomeCard onStart={() => setGameState("playing")} />
+            ) : gameState === "playing" ? (
               <ScenarioCard
                 scenario={SCENARIOS[currentStep]}
                 currentStep={currentStep}

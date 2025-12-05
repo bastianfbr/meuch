@@ -44,6 +44,6 @@ export interface LastSelection {
   endMsg?: string;
 }
 
-export type GameState = "playing" | "paused" | "gameover" | "win";
+export type GameState = "welcome" | "playing" | "paused" | "gameover" | "win";
 
 export type MetricColor = "red" | "green" | "orange" | "blue";
